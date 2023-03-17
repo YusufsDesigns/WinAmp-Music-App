@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .category{
+        @apply border-2 border-white rounded-full mb-5 py-2 px-5 text-white capitalize
+    }
+    .category.selected{
+        @apply border-none bg-red
+    }
+}
+
+body{
+    overflow: hidden;
+}
+
+/* img{
+    width: 100%;
+} */
+
+.fifteen{
+    width: 15%;
+    height: calc(100vh - 133.6px);
+}
+
+.sixty-five{
+    width: 65%;
+    height: calc(100vh - 133.6px)
+}
+
+.twenty{
+    height: calc(100vh - 133.6px)
+}
+
+.eighty-five{
+    width: 85%;
+}
+
+.eightyFive{
+    width: 85%;
+    
+}
+
+.full{
+    width: 100%;
+    height: calc(100vh - 133.6px);
+}
+
+.current{
+    background: rgba(91, 88, 88, 0.2)
+}
+
+.bg{
+    background: url(../public/ayra-star.png)no-repeat center center/cover;
+    height: 277px;
+}
+
+.small{
+    font-size: 10px;
+}
+
+.text-dot{
+    text-overflow: '...';
+}
+
+.overlay::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: none;
+    border-radius: 8px;
+}
+
+.overlay:hover::after{
+    background: rgba(0, 0, 0, 0.8);
+    transition: all 0.2s;
+}
+
+.overlay-icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: none;
+}
+
+.overlay:hover .overlay-icon{
+    display: block;
+    transition: all 0.2s;
+}
+
+.animate{
+    animation-name: loader;
+    animation-duration: 4s;
+}
+
+@keyframes loader{
+    0% {transform: scale(0.7);}
+    50%{transform: scale(1.3);}
+    90%{transform: scale(0.7);}
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #1E1E1E; 
+}
+
+::-webkit-scrollbar-button{
+    height: 20px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #5B5858; 
+    height: 20px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:horizontal{
+    background: #1E1E1E;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #4e4d4d; 
+}
+
+::-webkit-scrollbar-thumb:horizontal:hover {
+    background: none; 
+}
+
+.seek-slider, .volume-slider {
+    height: 5px;
+    -webkit-transition: .2s;
+}
+
+.seek-slider input, .volume-slider input{
+    height: 5px;
+    z-index: 10;
+    opacity: 0;
+    background: red;
+}
+
+.seek-slider{
+    width: 50rem;
+    max-width: 100%;
+}
+
+.progress{
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.volume-slider{
+    width: 10rem;
+    max-width: 100%;
+}
+
+@media(max-width:1350px){
+    .seek-slider{
+        width: 45rem;
+        max-width: 100%;
+    }
+}
+
+@media(max-width:1270px){
+    .seek-slider{
+        width: 40rem;
+        max-width: 100%;
+    }
+}
+
+@media(max-width:1187px){
+    .seek-slider{
+        width: 35rem;
+        max-width: 100%;
+    }
+}
+
+@media(max-width:1100px){
+    .seek-slider{
+        width: 30rem;
+        max-width: 100%;
+    }
+}
+
+@media(max-width:1025px){
+    .seek-slider{
+        width: 25rem;
+        max-width: 100%;
+    }
+
+    .volume-slider{
+        width: 5rem;
+        max-width: 100%;
+    }
+}
+
+@media(max-width:768px){
+    .seek-slider{
+        width: 100%;
+        height: 2px;
+        border-radius: 0;
+    }
+
+    .seek-slider input{
+        height: 2px;
+    }
+}
+
