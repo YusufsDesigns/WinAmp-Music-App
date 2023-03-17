@@ -5,11 +5,11 @@
 @tailwind utilities;
 
 @layer components{
-    .category{
-        @apply border-2 border-white rounded-full mb-5 py-2 px-5 text-white capitalize
+    .menu{
+        @apply hidden flex-col space-y-12 overflow-y-scroll py-8 text-grey font-poppins bg-mid-black  absolute z-10 full fifteen  lg:relative lg:flex
     }
-    .category.selected{
-        @apply border-none bg-red
+    .menu.on{
+        @apply flex
     }
 }
 
@@ -42,11 +42,6 @@ body{
 .eightyFive{
     width: 85%;
     
-}
-
-.full{
-    width: 100%;
-    height: calc(100vh - 133.6px);
 }
 
 .current{
@@ -207,6 +202,11 @@ body{
     .volume-slider{
         width: 5rem;
         max-width: 100%;
+    }
+
+    .full{
+        width: 100%;
+        height: calc(100vh - 133.6px);
     }
 }
 

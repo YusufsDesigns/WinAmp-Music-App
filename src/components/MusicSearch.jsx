@@ -16,9 +16,6 @@ export default function MusicSearch(props){
                 <div className="flex items-center md:space-x-36 lg:space-x-80">
                     <span className="text-grey text-sm font-poppins hidden md:block">{music.album.title}</span>
                     <div className="space-x-2 flex items-center">
-                        <HiDownload className="text-xl text-grey" 
-                        onClick={props.handleDownloadClick(music.id, music.song, music.title)}
-                        />
                         <BiDotsVerticalRounded className="text-xl text-grey"  />
                     </div>
                 </div>

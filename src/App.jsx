@@ -162,9 +162,9 @@ function App() {
       :
       <div className='flex w-full'>
         <Menu menu={menu} />
-        {!musicSearched && <div className='px-5 lg:px-2.5 overflow-y-scroll h-screen w-full full lg:sixty-five'>
+        {!musicSearched && <div className='px-5 lg:px-2.5 overflow-y-scroll h-screen full sixty-five'>
           <nav className='py-9 flex items-center justify-between'>
-            <form className="bg-dark-grey py-3 px-5 flex items-center rounded-md space-x-5 w-3/4" onSubmit={handleSubmit}>
+            <form className="bg-dark-grey py-3 px-5 flex items-center rounded-md space-x-5 w-3/4 lg:w-2/5" onSubmit={handleSubmit}>
               <img src={searchIcon} alt="" />
               <input
                   type="text" 

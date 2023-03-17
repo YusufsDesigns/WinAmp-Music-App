@@ -9,7 +9,7 @@ import logoutIcon from '../assets/icons/logout-icon.png'
 
 export default function Menu(props){
     return(
-        <div className='flex flex-col space-y-12 overflow-y-scroll py-8 text-grey font-poppins lg:opacity-60 absolute bg-mid-black top-0 left-0 full z-10 lg:relative lg:fifteen' style={props.menu ? {display: 'flex'} : {display: "none"}}>
+        <div className={props.menu ? 'menu on' : 'menu'}>
             <img src={Logo} className='w-9 h-14 self-center' alt="" />
             <div className='space-y-4'>
                 <span className='text-grey text-base font-medium px-10'>MENU</span>
@@ -22,23 +22,23 @@ export default function Menu(props){
                     </li>
                     <li className='flex space-x-3 items-center px-10'>
                         <img src={radioIcon} alt="" />
-                        <span className='text-base font-normal'>Explore</span>
+                        <span className='text-sm font-normal'>Explore</span>
                     </li>
                     <li className='flex space-x-3 items-center px-10'>
                         <img src={podcastIcon} alt="" />
-                        <span className='text-base font-normal'>Podcasts</span>
+                        <span className='text-sm font-normal'>Podcasts</span>
                     </li>
                     <li className='flex space-x-3 items-center px-10'>
                         <img src={playlistIcon} alt="" />
-                        <span className='text-base font-normal'>Playlist</span>
+                        <span className='text-sm font-normal'>Playlist</span>
                     </li>
                     <li className='flex space-x-3 items-center px-10'>
                         <img src={heartIcon} alt="" />
-                        <span className='text-base font-normal'>Favourites</span>
+                        <span className='text-sm font-normal'>Favourites</span>
                     </li>
                     <li className='flex space-x-3 items-center px-10'>
                         <img src={libraryIcon} alt="" />
-                        <span className='text-base font-normal'>Library</span>
+                        <span className='text-sm font-normal'>Library</span>
                     </li>
                 </ul>
             </div>
@@ -47,19 +47,19 @@ export default function Menu(props){
                 <ul className='space-y-4'>
                     <li className='flex space-x-3 items-center px-10'>
                         <img src={playlistIcon} alt="" />
-                        <span className='text-base font-normal'>Traffic Vibez</span>
+                        <span className='text-sm font-normal'>Traffic Vibez</span>
                     </li>
                     <li className='flex space-x-3 items-center px-10'>
                         <img src={playlistIcon} alt="" />
-                        <span className='text-base font-normal'>Work</span>
+                        <span className='text-sm font-normal'>Work</span>
                     </li>
                     <li className='flex space-x-3 items-center px-10'>
                         <img src={playlistIcon} alt="" />
-                        <span className='text-base font-normal'>Soft Gbedu</span>
+                        <span className='text-sm font-normal'>Soft Gbedu</span>
                     </li>
                     <li className='flex space-x-3 items-center px-10'>
                         <img src={addIcon} alt="" />
-                        <span className='text-base font-normal'>Add playlist</span>
+                        <span className='text-sm font-normal'>Add playlist</span>
                     </li>
                 </ul>
             </div>
