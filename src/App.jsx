@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import './index.css'
+import axios from 'axios'
 import { CiMenuFries } from 'react-icons/ci'
 import Loader from './components/Loader'
 import MusicCards from './components/MusicCards'
@@ -17,15 +18,18 @@ function App() {
   const audioRef = useRef();
   const [musicData, setMusicData] = useState()
   const [initialPage, setInitialPage] = useState(false)
-  const [formData, setFormData] = useState({name: ""})
+  const [formData, setFormData] = useState('')
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
   const [musicSearchData, setMusicSearchData] = useState()
   const [musicSearched, setMusicSearched] = useState(false)
   const [menu, setMenu] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    async function getMusicData(){
+    const fetchData = async () => {
+      setIsLoading(true);
       const options = {
         method: 'GET',
         headers: {
@@ -33,12 +37,11 @@ function App() {
           'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
         }
       };
-      
-      const res = await fetch(`https://deezerdevs-deezer.p.rapidapi.com/search?q='pop'`, options)
-      const result = await res.json()
-      const musicArray = []
-      result.data.forEach(data => {
-        musicArray.push({
+      try {
+        const response = await axios.get('https://deezerdevs-deezer.p.rapidapi.com/search?q="pop"', options);
+        console.log(response.data.data);
+        const musicArray = response.data.data.map(data => {
+        return {
           id: data.id,
           album: data.album,
           artist: data.artist,
@@ -46,32 +49,34 @@ function App() {
           title: data.title_short,
           isPlayed: false,
           isDownloaded: false
-        })
+        }
       })
       console.log(musicArray);
       setMusicData(musicArray);
-    }
-    
-    getMusicData()
+      } catch (error) {
+        setError(error);
+      }
+      setIsLoading(false);
+    };
+    fetchData();
+  }, []);
 
-    return () => {
-
-    }
-
-
-}, [])
-
-  function handleChange(event){
-    setFormData({[event.target.name]: event.target.value})
+  if (isLoading) {
+    return <div className='bg-mid-black h-screen w-full flex items-center justify-center'><div className='lds-ellipsis'><div></div><div></div><div></div><div></div></div></div> ;
   }
 
-  function handleSubmit(event){
+  if (error) {
+    return <div className='flex flex-col space-y-2 items-center justify-center bg-mid-black w-full h-screen text-white font-poppins'>
+      <span>Something went wrong. Please reload</span>
+      <button className='bg-red text-white py-2 px-5 rounded' onClick={reload}>Reload</button>
+    </div>;
+  }
+
+
+  const handleSubmit = async (event) => {
     event.preventDefault()
     setMusicSearched(true)
-  }
-
-  useEffect(() => {
-    async function getMusicData(){
+    setIsLoading(true)
       const options = {
         method: 'GET',
         headers: {
@@ -79,12 +84,11 @@ function App() {
           'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
         }
       };
-      
-      const res = await fetch(`https://deezerdevs-deezer.p.rapidapi.com/search?q='${formData.name}`, options)
-      const result = await res.json()
-      const musicArray = []
-      result.data.forEach(data => {
-        musicArray.push({
+      try {
+        const response = await axios.get(`https://deezerdevs-deezer.p.rapidapi.com/search?q=${formData}`, options);
+        console.log(response.data.data);
+        const musicArray = response.data.data.map(data => {
+        return {
           id: data.id,
           album: data.album,
           artist: data.artist,
@@ -92,19 +96,23 @@ function App() {
           title: data.title_short,
           isPlayed: false,
           isDownloaded: false
-        })
+        }
       })
+      console.log(musicArray);
       setMusicSearchData(musicArray);
-    }
-    
-    getMusicData()
+      } catch (error) {
+        setError(error);
+      }
+      setIsLoading(false);
+  }
 
-    return () => {
+  // if (searchIsLoading) {
+  //   return <div className='flex items-center justify-center bg-mid-black w-full h-screen text-red font-poppins'>Loading...</div>;
+  // }
 
-    }
-
-
-}, [formData.name])
+  // if (searchError) {
+  //   return <div className='flex items-center justify-center bg-mid-black w-full h-screen text-red font-poppins'>Oops! Something went wrong.</div>;
+  // }
 
   function handlePlay(){
     audioRef.current.play()
@@ -128,7 +136,7 @@ function App() {
     handlePlay()
   }
 
-  function openInitialPage(){
+  function reload(){
     window.location.reload()
   }
 
@@ -169,9 +177,9 @@ function App() {
               <input
                   type="text" 
                   name="name" 
-                  value={formData.name} 
+                  value={formData} 
                   placeholder="Search artists, songs, podcasts..."
-                  onChange={handleChange}
+                  onChange={(event) => setFormData(event.target.value)}
                   className='border-none bg-dark-grey outline-none w-full text-grey font-poppins placeholder:font-poppins placeholder:text-mid-grey'
               />
             </form>
@@ -190,7 +198,7 @@ function App() {
         </div>}
         {!musicSearched && <Sidebar musicData={musicData} handleDownloadClick={handleDownloadClick} />}
         {musicSearched && 
-          <MusicSearch musicData={musicSearchData} songClick={searchedSongClick} name={formData.name} handleDownloadClick={handleDownloadClick} reload={openInitialPage} />}
+          <MusicSearch musicData={musicSearchData} songClick={searchedSongClick} name={formData.name} handleDownloadClick={handleDownloadClick} reload={reload} />}
         {!musicSearched && 
           <AudioPlayer 
             data={musicData} 
