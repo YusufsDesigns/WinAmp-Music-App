@@ -8,7 +8,7 @@ export default function Loader(props) {
     useEffect(() => {
         setTimeout(() => {
             props.setInitial(true)
-        }, 4000)
+        }, 5000)
     }, [])
 
     return(
